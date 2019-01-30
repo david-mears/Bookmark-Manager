@@ -1,4 +1,12 @@
 <h1>Your bookmarks:</h1>
+<div>
   <% @list.each { |url| %>
     <h7><a href=<%=url%>><%=url%></a></h7><br />
   <% } %>
+</div>
+<div>
+  <form action='/adding' method='post'>
+    Add a new bookmark: <input type='text' name='new'>
+    <input type='submit' value='add'>
+  </form>
+</div>
