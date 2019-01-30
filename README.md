@@ -1,5 +1,12 @@
 # Bookmark Manager Project
 
+## A guide to setup the database from scratch:
+
+1. Connect to `psql`
+2. Create the database using the `psql` command `CREATE DATABASE bookmark_manager;`
+3. Connect to the database using the `pqsl` command `\c bookmark_manager;`
+4. Run the query we have saved in the file `01_create_bookmarks_table.sql`
+
 ## User Stories and domain model diagrams (fun)
 
 ```
@@ -10,10 +17,34 @@ I want to see a list of my bookmarks
 
 ![domain model diagram](./images/show_list.jpg)
 
+## A later domain model diagram:
 
-## A guide to setup the database from scratch:
-
-1. Connect to `psql`
-2. Create the database using the `psql` command `CREATE DATABASE bookmark_manager;`
-3. Connect to the database using the `pqsl` command `\c bookmark_manager;`
-4. Run the query we have saved in the file `01_create_bookmarks_table.sql`
+     ┌──────┐          ┌──────────┐          ┌─────┐          ┌────────┐          ┌────┐
+     │Client│          │Controller│          │Model│          │Database│          │View│
+     └──┬───┘          └────┬─────┘          └──┬──┘          └───┬────┘          └─┬──┘
+        │    get-request    │                   │                 │                 │   
+        │ ──────────────────>                   │                 │                 │   
+        │                   │                   │                 │                 │   
+        │                   │       .all        │                 │                 │   
+        │                   │ ─────────────────>│                 │                 │   
+        │                   │                   │                 │                 │   
+        │                   │                   │     query       │                 │   
+        │                   │                   │────────────────>│                 │   
+        │                   │                   │                 │                 │   
+        │                   │                   │ result-object   │                 │   
+        │                   │                   │<─ ─ ─ ─ ─ ─ ─ ─ │                 │   
+        │                   │                   │                 │                 │   
+        │                   │    [bookmarks]    │                 │                 │   
+        │                   │ <─ ─ ─ ─ ─ ─ ─ ─ ─│                 │                 │   
+        │                   │                   │                 │                 │   
+        │                   │                   │  [bookmarks]    │                 │   
+        │                   │ ──────────────────────────────────────────────────────>   
+        │                   │                   │                 │                 │   
+        │                   │                   │      html       │                 │   
+        │                   │ <─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─    
+        │                   │                   │                 │                 │   
+        │      response     │                   │                 │                 │   
+        │ <─ ─ ─ ─ ─ ─ ─ ─ ─                    │                 │                 │   
+     ┌──┴───┐          ┌────┴─────┐          ┌──┴──┐          ┌───┴────┐          ┌─┴──┐
+     │Client│          │Controller│          │Model│          │Database│          │View│
+     └──────┘          └──────────┘          └─────┘          └────────┘          └────┘

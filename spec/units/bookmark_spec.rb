@@ -5,6 +5,7 @@ describe Bookmark do
     expect{ described_class.new('www.website.com') }.to change{ described_class.list.count }.by(1)
   end
   it 'can remember the bookmark it was given' do
+    described_class.new('www.website.com')
     expect(described_class.list).to eq ['www.website.com']
   end
 end

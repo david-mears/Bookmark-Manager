@@ -6,6 +6,8 @@ require 'simplecov'
 require 'simplecov-console'
 require 'rubocop'
 
+require 'web_helper'
+
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::Console,
   # Want a nice code coverage website? Uncomment this next line!
@@ -35,6 +37,12 @@ Capybara.app = BookmarkManager
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.before(:each) do
+    require 'setup_test_database'
+    setup_test_database
+    test_conn = PG.connect( dbname: 'test_bookmark_manager' )
+    allow(Bookmark).to receive(:conn).and_return(test_conn)
+  end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
