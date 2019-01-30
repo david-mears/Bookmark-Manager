@@ -1,2 +1,4 @@
 <h1>Your bookmarks:</h1>
-  <%= @list %>
+  <% @list.each { |url| %>
+    <h7><a href=<%=url%>><%=url%></a></h7><br />
+  <% } %>

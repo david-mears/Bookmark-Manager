@@ -7,8 +7,4 @@ describe Bookmark do
   it 'can remember the bookmark it was given' do
     expect(described_class.list).to eq ['www.website.com']
   end
-  
-  after(:all) do
-    described_class.class_variable_set(:@@list, [])
-  end
 end
