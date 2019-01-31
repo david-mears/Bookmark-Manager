@@ -1,12 +1,14 @@
-<h1>Your bookmarks:</h1>
-<div>
-  <% @list.each { |url| %>
-    <h7><a href=<%=url%>><%=url%></a></h7><br />
-  <% } %>
-</div>
 <div>
   <form action='/adding' method='post'>
-    Add a new bookmark: <input type='text' name='new'>
+    Add a new bookmark...<br>
+    title:<input type='text' name='title'>
+    url:<input type='text' name='new'>
     <input type='submit' value='add'>
   </form>
+</div>
+<h1>Your bookmarks:</h1>
+<div>
+  <% @list.each { |hash| %>
+    <h7><a href=<%=hash[:url]%>><%=hash[:title]%></a></h7><br>
+  <% } %>
 </div>
