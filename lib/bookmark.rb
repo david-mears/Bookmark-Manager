@@ -4,8 +4,8 @@ class Bookmark
 
   @@conn = PG.connect( dbname: 'bookmark_manager' )
 
-  def initialize(link)
-    Bookmark.conn.exec( "INSERT INTO bookmarks (url) VALUES ('#{link}')")
+  def self.add(link)
+    self.conn.exec( "INSERT INTO bookmarks (url) VALUES ('#{link}')")
   # Should be hackable with:
   # '); DELETE FROM bookmarks; INSERT INTO bookmarks (url) VALUES ('I HACKED YOU!!'); -->
   end
